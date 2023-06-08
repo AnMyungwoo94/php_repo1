@@ -1,0 +1,95 @@
+create database memberDB;
+use memberDB;
+drop table memberTBL;
+create table if not exists memberTBL (
+	num int NOT NULL AUTO_INCREMENT,
+    id char(20) not null,
+    pass char(20) not null,
+    name char(20) not null,
+    email char(20),
+    PRIMARY KEY (num)
+);
+describe memberTBL;
+
+create table customer (
+    num int not null auto_increment,
+    name char(20) not null,
+    tel char(15) not null,    
+    address char(100),
+    gender char(1),
+    age int,
+    mileage int,
+    primary key(num)
+);
+
+show tables;
+
+use memberDB;
+
+create table friend (
+        num int not null auto_increment,
+        name char(10) not null,
+        tel char(15) not null,
+        address char(80),
+        primary key(num) );
+        
+desc friend;
+
+select * from members;
+
+create table if not exists members (
+num int not null auto_increment,
+id char(15) not null,
+pass char(15) not null,
+name char(15) not null,
+email char(80),
+regist_day char(20),
+level int,
+point int,
+primary key(num)
+);
+
+alter table members modify level int default 0;
+desc members;
+insert into members values(null, 'admin', 'admin', '관리자', 'admin@naver.com', '2023-06-01 10:20:30',1, 0);
+
+insert into members values(null, 'aaaa', 'aaaa', 'aaaa', 'aaaa@naver.com', '2023-06-01 10:20:30', 9, 0);
+select * from members where num = 3;
+update members set pass='33', name='33', email='33@gmail.com' where num = 3;
+delete from members where num = 1;
+select * from members where id = 3;
+
+create table if not exists message (
+num int not null auto_increment,
+send_id char(20) not null,
+rv_id char(20) not null,
+subject char(200) not null,
+content text not null,
+regist_day char(20),
+primary key(num)
+);
+
+desc message;
+
+select * from members;
+
+select count(*) as count from message;
+
+create table if not exists board ( 
+    num int not null auto_increment, 
+    id char(15) not null,
+    name char(10) not null, 
+    subject char(200) not null, 
+    content text not null, 
+    regist_day char(20) not null, 
+    hit int not null, 
+    file_name char(40), 
+    file_type char(40), 
+    file_copied char(40), 
+    primary key(num)
+);
+desc board;
+
+alter table members add unique uk_id(id);
+delete from members where num = 8 and 9 and 10 and 54;
+drop table members;

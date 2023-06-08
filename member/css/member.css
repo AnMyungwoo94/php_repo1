@@ -1,0 +1,104 @@
+/* 메인 콘텐트 */
+#main_content {
+  position: relative;
+  width: 1000px;
+  height: 240px;
+  margin: 0 auto;
+}
+
+#latest {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+}
+
+#latest h4 {
+  width: 500px;
+  font-size: 16px;
+  padding-bottom: 5px;
+  border-bottom: solid 1px #dddddd;
+}
+
+#latest ul {
+  margin-top: 20px;
+}
+
+#latest li {
+  margin-top: 8px;
+  margin-left: 10px;
+}
+
+#latest span {
+  display: inline-block;
+}
+
+#latest span:nth-child(1) {
+  width: 280px;
+}
+
+#latest span:nth-child(2) {
+  width: 100px;
+}
+
+#latest span:nth-child(3) {
+  width: 100px;
+}
+
+#point_rank {
+  position: absolute;
+  top: 30px;
+  left: 590px;
+}
+
+#point_rank h4 {
+  width: 350px;
+  font-size: 16px;
+  padding-bottom: 5px;
+  border-bottom: solid 1px #dddddd;
+}
+
+#point_rank ul {
+  margin-top: 20px;
+}
+
+#point_rank li {
+  margin-top: 8px;
+  margin-left: 15px;
+}
+
+#point_rank span {
+  display: inline-block;
+}
+
+#point_rank span:nth-child(1) {
+  width: 50px;
+}
+
+#point_rank span:nth-child(2) {
+  width: 100px;
+}
+
+#point_rank span:nth-child(3) {
+  width: 100px;
+}
+
+#point_rank span:nth-child(4) {
+  width: 100px;
+}
+
+/* 메인 콘텐트 */
+#main_content { position: relative; width: 1000px; height: 400px; margin: 0 auto; }
+
+/* 가입 양식 폼 */
+#join_box {	width: 600px;	margin: 0 auto; }
+#join_box h2 { 	border-bottom: solid 1px #dddddd; padding-top: 50px; }
+#join_box .col1 { float: left;	width: 110px; margin-top: 4px; }
+#join_box .col2 { float: left;	width: 400px; }
+#join_box .col3 { float: left; }
+#join_box .form input { width: 390px;	height: 22px; }
+#join_box .form { height: 38px; }
+#join_box .id {	margin-top: 20px; }
+#join_box input[name=email1] { width: 100px; }
+#join_box input[name=email2] { width: 275px; }
+#join_box .bottom_line { margin-top: 10px;	border-bottom: solid 1px #cccccc; }
+#join_box .buttons { text-align: right;	margin: 20px 100px 0 0; }

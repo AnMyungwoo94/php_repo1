@@ -1,0 +1,303 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const send = document.querySelector("#send");
+  const cancel = document.querySelector("#cancel");
+  const btn_zipcode = document.querySelector("#btn_zipcode");
+
+  send.addEventListener("click", () => {
+    if (document.member_form.id.value == "") {
+      alert("아이디를 입력하세요!");
+      document.member_form.id.focus();
+      return false;
+    }
+    if (document.member_form.id_chk.value == "0") {
+      alert("아이디를 체크하세요");
+      document.member_form.id.focus();
+      return false;
+    }
+    if (document.member_form.email_check.value == "0") {
+      alert("이메일을 체크하세요");
+      document.member_form.id.focus();
+      return false;
+    }
+    if (document.member_form.pass.value == "") {
+      alert("비밀번호를 입력하세요!");
+      document.member_form.pass.focus();
+      return false;
+    }
+    if (document.member_form.pass_confirm.value == "") {
+      alert("비밀번호 확인을 입력하세요!");
+      document.member_form.pass_confirm.focus();
+      return false;
+    }
+    if (
+      document.member_form.pass.value != document.member_form.pass_confirm.value
+    ) {
+      alert("비밀번호가 일치하지 않습니다.\n다시 입력해 주세요!");
+      document.member_form.pass.focus();
+      document.member_form.pass_confirm.value = "";
+      document.member_form.pass.select();
+      return false;
+    }
+    if (document.member_form.name.value == "") {
+      alert("이름을 입력하세요!");
+      document.member_form.name.focus();
+      return false;
+    }
+    if (document.member_form.email1.value == "") {
+      alert("이메일 주소를 입력하세요!");
+      document.member_form.email1.focus();
+      return false;
+    }
+    if (document.member_form.email2.value == "") {
+      alert("이메일 주소를 입력하세요!");
+      document.member_form.email2.focus();
+      return false;
+    }
+
+    document.member_form.submit();
+  });
+  cancel.addEventListener("click", () => {
+    // alert("취소버튼");
+    document.member_form.id.value = "";
+    document.member_form.pass.value = "";
+    document.member_form.pass_confirm.value = "";
+    document.member_form.name.value = "";
+    document.member_form.email1.value = "";
+    document.member_form.email2.value = "";
+    return;
+  });
+
+  btn_zipcode.addEventListener("click", () => {
+    new daum.Postcode({
+      oncomplete: function(data) {
+
+        let addr = "";
+        let extra_addr = ""
+        //지번, 도로명 선택하기
+        if(data.userSelectedType == "J"){
+            addr = data.jibunAddress
+        }else if(data.userSelectedType == "R"){
+          addr = data.roadAddress
+        }
+
+        //동이름이 점검
+        if(data.bname != ''){
+          extra_addr = data.bname
+        }
+
+        //빌딩명 점검
+        if(data.buildingName != ''){
+          extra_addr += ","+data.buildingName
+        }
+        if(extra_addr != ''){
+          extra_addr ="("+extra_addr+")" 
+        }
+        addr = addr + extra_addr
+
+        document.member_form.zipcode.value = data.zonecode;
+        document.member_form.addr1.value = addr;
+
+      }
+    }).open();
+  })
+
+});
+
+// function check_id() {
+//   if (document.member_form.id.value == "") {
+//     alert("아이디를 입력하세요!");
+//     document.member_form.id.focus();
+//     return false;
+//   }
+//   //AJAX로 표현
+//   //AJAX 통신하는 객체 만듬
+//   const xhr = new XMLHttpRequest()
+//   xhr.open("POST", "./member_check.php", true)
+
+//   //전송할데이터 생성
+//   const formdata =  new FormData()
+//   formdata.append('id', document.member_form.id.value)
+//   formdata.append('mode',"id_chk")
+//   xhr.send(formdata)
+
+//   //서버에서 member_check_id.php 요청을 하면 돌려줄 JSON 데이터 도착이 완료하면 발생
+//   xhr.onload = () => {
+//     if(xhr.status == 200){
+//       //{'result': 'success'} => {'result': 'success'}
+//       //JSON.parse json 객체를 자바스트립트 객체로 바꿔줌
+//       const data = JSON.parse(xhr.responseText)
+//       console.log(data);
+      
+//      switch(data.result){
+//       case 'fail' : 
+//       alert('사용할 수 없는 아이디입니다.')
+//       document.member_form.id.value = "";
+//       document.member_form.id_chk.value = "0"
+//       document.member_form.id.focus()
+//       break;
+//       case 'success' :
+//       alert('사용할 수 있는 아이디입니다.')
+//       document.member_form.id_chk.value = "1"
+//       document.member_form.pass.focus()
+//       break;
+//       case 'empty_id' : 
+//       alert('아이디를 입력해주세요')
+//       document.member_form.id_chk.value = "0"
+//       document.member_form.id.focus()
+//       break;
+//       default : 
+//      }
+//     }else{
+//       alert("서버통신이 안됩니다.")
+//     }
+//   }
+// }
+
+// function check_email(){
+  
+//   if (document.member_form.email1.value == '') {
+//     alert("이메일 입력하세요!");
+//     document.member_form.email1.focus();
+//     return false;
+//   }
+//     //AJAX
+//     const xhr = new XMLHttpRequest()
+//     xhr.open("POST", "./member_check.php", true)
+
+//     //전송할데이터 생성
+//     const formdata =  new FormData()
+//     formdata.append('email1', document.member_form.email1.value)
+//     formdata.append('email2', document.member_form.email2.value)
+//     xhr.send(formdata)
+
+//     //서버에서 member_check_id.php 요청을 하면 돌려줄 JSON 데이터 도착이 완료하면 발생
+//     xhr.onload = () => {
+//       if(xhr.status == 200){
+//         //{'result': 'success'} => {'result': 'success'}
+//         //JSON.parse json 객체를 자바스트립트 객체로 바꿔줌
+//         const data = JSON.parse(xhr.responseText)
+//        switch(data.result){
+//         case 'fail' : 
+//         alert('사용할 수 없는 이메일입니다.')
+//         document.member_form.email1.value = "";
+//         document.member_form.email2.value = "";
+//         document.member_form.email1.focus()
+//         break;
+//         case 'success' :
+//         alert('사용할 수 있는 이메일입니다.')
+
+//         document.member_form.email2.focus()
+//         break;
+//         case 'empty_email' : 
+//         alert('이메일를 입력해주세요')
+//         document.member_form.email1.focus()
+//         break;
+//         default : 
+//        }
+//       }else{
+//         alert("서버통신이 안됩니다.")
+//       }
+//     }
+//   }
+
+function check_email(){
+  // 이메일 점검
+  if (document.member_form.email1.value == '') {
+    alert("이메일 입력하세요!");
+    document.member_form.email1.focus();
+    return false;
+  }
+    //AJAX
+    const xhr = new XMLHttpRequest()
+    xhr.open("POST", "./member_check.php", true)
+
+    //전송할데이터 생성
+    const formdata =  new FormData()
+    formdata.append('email1', document.member_form.email1.value)
+    formdata.append('email2', document.member_form.email2.value)
+    formdata.append('mode',"email_check")
+    xhr.send(formdata)
+
+    //서버에서 member_check_id.php 요청을 하면 돌려줄 JSON 데이터 도착이 완료하면 발생
+    xhr.onload = () => {
+      if(xhr.status == 200){
+        //{'result': 'success'} => {'result': 'success'}
+        //JSON.parse json 객체를 자바스트립트 객체로 바꿔줌
+        const data = JSON.parse(xhr.responseText)
+       switch(data.result){
+        case 'fail' : 
+        alert('사용할 수 없는 이메일입니다.')
+        document.member_form.email_check.value="0";
+        document.member_form.email1.value = "";
+        document.member_form.email2.value = "";
+        document.member_form.email1.focus()
+        break;
+        case 'success' :
+        alert('사용할 수 있는 이메일입니다.')
+        document.member_form.email_check.value="1";
+        document.member_form.email2.focus()
+        break;
+        case 'empty_email' : 
+        alert('이메일를 입력해주세요')
+        document.member_form.email_check.value="0";
+        document.member_form.email1.focus()
+        break;
+        default : 
+       }
+      }else{
+        alert("서버통신이 안됩니다.")
+      }
+    }
+  }
+  
+  function check_id() {
+    if (document.member_form.id.value == "") {
+      alert("아이디를 입력하세요!");
+      document.member_form.id.focus();
+      return false;
+    }
+  
+    // window.open(
+    //   "member_check_id.php?id=" + document.member_form.id.value,
+    //   "IDcheck",
+    //   "left=700,top=300,width=400,height=150,scrollbars=no,resizable=yes"
+    // );
+  
+    // AJAX
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "./member_check.php", true);
+    // 전송할 데이터 생성
+    const formdata = new FormData();
+    formdata.append("id", document.member_form.id.value);
+    formdata.append("mode", "id_check");
+    xhr.send(formdata);
+    // 서버에 JSON 데이터가 도착 완료
+    xhr.onload = () => {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        // json.parse = json객체를 javascript객체로 변환
+        // {'result': 'success'} => {result: 'success'}
+        const data = JSON.parse(xhr.responseText);
+        switch (data.result) {
+          case "fail":
+            alert("사용 불가능한 아이디입니다.");
+            document.member_form.id.value = "";
+            document.member_form.id_check.value = "0";
+            document.member_form.id.focus();
+            break;
+          case "success":
+            alert("사용 가능한 아이디입니다.");
+            document.member_form.id_check.value = "1";
+            document.member_form.pass.focus();
+            break;
+          case "empty_id":
+            alert("아이디를 입력해주세요.");
+            document.member_form.id_check.value = "0";
+            document.member_form.id.focus();
+            break;
+          default:
+        }
+      } else {
+        alert("서버 통신 불가");
+      }
+    };
+  }

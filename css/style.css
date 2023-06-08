@@ -1,0 +1,87 @@
+/* 공통 설정 */
+* { padding: 0; margin: 0; box-sizing: border-box;}
+ul { list-style-type: none; }
+h2 { font-size: 21px; }
+a { display: inline-block; text-decoration: none; }
+a:link { text-decoration:none; color: #222222; }
+a:hover { text-decoration:none; color: #222222; }
+a:visited { text-decoration:none; color: #222222; }
+a:active { text-decoration:none; color: #222222; }
+/* 헤더(header.php) */
+header { height: 110px; border-bottom: solid 1px #cccccc}
+header .logo { float: left; margin: 20px; }
+header .top_menu { float: right; margin: 20px; }
+header li { display: inline; }
+header .main_menu {	text-align: right; clear: both; }
+header .main_menu li { font-size: 18px; font-weight: bold; margin-right: 40px; }
+/* 버튼 */
+.buttons { clear:both; text-align: right; margin: 5px 30px; }
+.buttons li { display: inline; }
+.buttons button { padding: 3px 20px; cursor: pointer; margin-top: 20px; }
+/* 회원가입 폼(form.php)*/
+.join_form { width: 600px; margin: 0 auto; border-bottom: solid 1px #cccccc; padding-bottom: 15px; }
+.join_form h2 { width: 600px; padding: 30px 0 10px 0; margin: 0 auto; border-bottom: solid 3px black;}
+.join_form li {	height: 40px; padding: 20px 10px;}
+.join_form .buttons { clear:both; text-align: right; margin-top: 30px; }
+.join_form button { padding: 3px 10px; }
+.join_form .col1 { width: 130px; }
+.join_form .col2 { width: 360px; }
+.join_form input { width: 360px; height: 30px; }
+.join_form span { display: inline-block; }
+/* 로그인 폼 (login_form.php)*/
+.login_form { width: 400px; height: 260px; margin: 0 auto; border-bottom: solid 1px #cccccc; }
+.login_form h2 { width: 400px; margin: 0 auto; padding: 30px 0 10px 0; border-bottom: solid 3px black; }
+.login_form li { height: 50px; padding: 20px 20px;}
+.login_form span { display: inline-block; }
+.login_form .col1 { width: 100px; }
+.login_form .col2 { width: 250px; }
+.login_form input { width: 250px; height: 30px; }
+.login_form button { padding: 8px 156px; cursor: pointer; }
+/* 게시판 글쓰기(form.php) */
+.board_form h2 { margin-top: 20px;	padding: 10px 30px; border-bottom: solid 2px black; }
+.board_form span { display: inline-block; }
+.board_form .col1 { width: 15%; float: left }
+.board_form .col2 { width: 85%; float: left }
+.board_form li { height: 50px; padding: 12px; border-bottom: solid 1px #dddddd; }
+.board_form input[type=text] { width: 100%; height: 25px; }
+.board_form .is_html { float: right; }
+.board_form .area { height: 155px; }
+.board_form textarea { width: 100%; height: 130px; }
+.board_form .email input { width: 150px; }
+/* 게시판 목록보기(list.php) */
+.board_list h2 { margin-top: 20px;	padding: 10px 30px; border-bottom: solid 2px black; }
+.board_list li { padding: 10px 0; border-bottom: solid 1px #dddddd; }
+.board_list span { display: inline-block; text-align: center; }
+.board_list .col1 { width: 10%; vertical-align: middle; }
+.board_list .col2 { width: 50%; text-align: left; vertical-align: middle;  }
+.board_list .col2 img { vertical-align: text-top; margin-right: 20px; }
+.board_list .col3 { width: 10%; vertical-align: middle; }
+.board_list .col4 { width: 10%; vertical-align: middle; }
+.board_list .col5 { width: 15%; text-align: center; vertical-align: middle;  }
+.page_num {	text-align: center;	margin-top: 20px; }
+.page_num li { display: inline; }
+/* 게시판 내용보기(view.php) */
+.board_view .title { margin-top: 20px;	padding: 10px 30px; border-bottom: solid 2px black; }
+.board_view .row1 { padding: 15px 30px; border-bottom: solid 1px #aaaaaa; }
+.board_view .row2 { padding: 15px 30px 80px 30px; border-bottom: solid 1px #cccccc; line-height: 180% }
+.board_view .col2 { float: right; }
+/* ripple */
+.ripple_title { padding: 20px 30px;}
+.ripple_title span { display: inline-block; }
+.ripple_title .col1 { width: 100px; }
+.ripple_title .col3 {  float: right; }
+.ripple_content { margin: 0 30px; border-bottom: dotted 1px #cccccc; padding-bottom: 20px; }
+.ripple_box { height:120px; padding:14px; margin: 30px; background-color:#efefef; border-top: solid 1px #cccccc; }
+.ripple_box1 { float:left; width:18%; }
+.ripple_box2 { float:left; width:72%; padding-left:5px; }
+.ripple_box2 textarea { width:100%; height: 80px; border:solid 1px #cccccc; }
+.ripple_box3 { width: 10%; float:left; padding-left:8px; }
+/* 푸터(footer.php) */
+footer { clear: both; padding-top: 30px; text-align: center; }
+footer p { line-height: 180%; }
+/* 메인 페이지 */
+.notice { width: 50%; float: left; padding: 30px 0 0 30px; }
+.qna { width: 50%;  float: right; padding: 30px 30px 0 30px; }
+.notice h4, .qna h4 { background-color: skyblue; padding: 5px 10px; color: white; margin-bottom: 20px;  }
+.notice span, .qna span { display: inline-block; margin-bottom: 10px; }
+.notice .col2, .qna .col2 { float: right; }
