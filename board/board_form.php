@@ -18,7 +18,8 @@
     include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/slide.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/db_connect.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/create_table.php";
-    create_table($conn, "board");
+    include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/page_lib.php";
+    create_table($conn, "image_board");
     ?>
   </header>
   <section>

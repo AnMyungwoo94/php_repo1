@@ -1,17 +1,28 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/db_connect.php";
 
-$sql = "select * from members order by name";
+$page = (isset($_GET["page"]) && is_numeric($_GET["page"]) && $_GET["page"] != "") ? $_GET["page"] : 1;
+
+
+$sql2 = "select count(*) as cnt from members";
+$stmt2 = $conn->prepare($sql2);
+$stmt2->setFetchMode(PDO::FETCH_ASSOC);
+$result2 = $stmt2->execute();
+$row2 = $stmt2->fetch();
+$total_record = $row2['cnt'];
+$scale = 10;
+
+$start = ($page - 1) * $scale;
+$sql = "select * from members order by num desc limit {$start}, {$scale}";
 $stmt = $conn->prepare($sql);
 $result = $stmt->execute();
 if (!$result) {
   die("
   <script>
-  alert('데이터 삽입 오류');
+  alert('데이터 로드 오류');
   </script>");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -22,8 +33,8 @@ if (!$result) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- 슬라이드 스크립트 -->
   <script src="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/js/slide.js' ?>"></script>
-  <!-- 회원가입폼 스크립트 -->
-  <script src="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/member/js/member.js' ?>"></script>
+
+  <script src="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/member/js/member_excel.js' ?>"></script>
   <!-- 부트스트랩 CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <!-- 부트스트랩 JavaScript Bundle with Popper -->
@@ -43,9 +54,10 @@ if (!$result) {
 
 <body>
   <header>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/header.php"; ?>
-
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/slide.php"; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/header.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/page_lib.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/slide.php";
+    ?>
   </header>
   <div class="container w-70">
     <!-- 테이블시작 -->
@@ -88,7 +100,13 @@ if (!$result) {
         ?>
       </tbody>
     </table>
-    <!-- 테이블종료 -->
+    <div class="container d-flex justify-content-center align-items-start mb-3 gap-3">
+      <?php
+      $set_page_limit = 5;
+      echo pagination($total_record, $scale, $set_page_limit, $page);
+      ?>
+      <button type="button" class="btn btn-outline-dark " id="btn_excel">엑셀로 저장</button>
+    </div>
   </div>
   <footer>
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/footer.php"; ?>

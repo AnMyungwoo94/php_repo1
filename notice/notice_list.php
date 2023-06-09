@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/slide.css?v=<?= date('Ymdhis') ?>">
 	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/header.css' ?>">
 	<script src="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/js/slide.js' ?>" defer></script>
+	<script src="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/notice/js/notice.js?v=<?= date('Ymdhis') ?>"></script>
+	<script src="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/notice/js/notice_excel.js?v=<?= date('Ymdhis') ?>"></script>
 	<!-- 부트스트랩 CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<!-- 부트스트랩 JavaScript Bundle with Popper -->
@@ -28,6 +30,7 @@
 		include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/header.php";
 		include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/slide.php";
 		include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/create_table.php";
+		include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/page_lib.php";
 		create_table($conn, "notice"); //DB에 테이블이 없을 경우 생성함
 		?>
 	</header>
@@ -109,32 +112,13 @@
 				}
 				?>
 			</table>
-			<nav aria-label="Page navigation example" class="nav mb-3">
-				<ul class="pagination">
-					<?php
-					if ($total_page >= 2 && $page >= 2) {
-						$new_page = $page - 1;
-						echo "<li class='page-item'><a class='page-link' href='notice_list.php?page=$new_page'>◀ 이전</a></li>";
-					} else
-						echo "<li class='page-item'>&nbsp;</li>";
-
-					// 게시판 목록 하단에 페이지 링크 번호 출력
-					for ($i = 1; $i <= $total_page; $i++) {
-						if ($page == $i)     // 현재 페이지 번호 링크 안함
-						{
-							echo "<li class='page-item'><b class='page-link'> $i </b></li>";
-						} else {
-							echo "<li class='page-item'><a class='page-link' href='notice_list.php?page=$i'>$i</a></li>";
-						}
-					}
-					if ($total_page >= 2 && $page != $total_page) {
-						$new_page = $page + 1;
-						echo "<li class='page-item'><a class='page-link' href='notice_list.php?page=$new_page'>다음 ▶</a></li>";
-					} else
-						echo "<li class='page-item'>&nbsp;</li>";
-					?>
-				</ul> <!-- page -->
-			</nav>
+			<div class="container d-flex justify-content-center align-items-start mb-3 gap-3">
+				<?php
+				$set_page_limit = 5;
+				echo pagination($total_record, $scale, $set_page_limit, $page);
+				?>
+				<button type="button" class="btn btn-outline-dark " id="btn_excel">엑셀로 저장</button>
+			</div>
 			<ul class="buttons">
 				<li><button onclick="location.href='notice_list.php'">목록</button></li>
 				<li>

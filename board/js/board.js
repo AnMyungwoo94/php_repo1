@@ -13,4 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     document.board_form.submit();
   });
+
+    
+
 });
+

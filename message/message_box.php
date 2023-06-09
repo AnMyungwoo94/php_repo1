@@ -8,18 +8,23 @@
   <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/message/css/message.css' ?>">
   <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/slide.css?er=1' ?>">
   <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/header.css' ?>">
+  <!-- 부트스트랩 CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <!-- 부트스트랩 JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <header>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/header.php"; ?>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/slide.php"; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/header.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/slide.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/message_page_lib.php"; ?>
   </header>
   <section>
     <div id="message_box">
       <h3>
         <?php
-        $page = (isset($_GET['page']) && $_GET["page"] != '') ? $_GET['page'] : 1;
+        $page = (isset($_GET["page"]) && is_numeric($_GET["page"]) && $_GET["page"] != "") ? $_GET["page"] : 1;
         $mode = (isset($_GET['mode']) && $_GET["mode"] != '') ? $_GET['mode'] : '';
 
         if ($mode == "send")
@@ -29,20 +34,16 @@
         ?>
       </h3>
       <div>
-        <ul id="message">
-          <li>
-            <span class="col1">번호</span>
-            <span class="col2">제목</span>
-            <span class="col3">
-              <?php
-              if ($mode == "send")
-                echo "받은이";
-              else
-                echo "보낸이";
-              ?>
-            </span>
-            <span class="col4">등록일</span>
-          </li>
+        <table class="table table-striped table-hover">
+          <thead class="table-light">
+            <th class="col1">번호</th>
+            <th class="col2">제목</th>
+            <th class="col3">
+              <?php if ($mode == "send") echo "받은이";
+              else echo "보낸이"; ?>
+            </th>
+            <th class="col4">등록일</th>
+          </thead>
           <?php
           include_once $_SERVER['DOCUMENT_ROOT'] . "/php_source/khs/common/db_connect.php";
 
@@ -60,11 +61,7 @@
           $total_record = $row['cnt'];
           $scale = 10;
 
-          // 전체 페이지 수($total_page) 계산 
-          if ($total_record % $scale == 0)
-            $total_page = floor($total_record / $scale);
-          else
-            $total_page = floor($total_record / $scale) + 1;
+
 
           // 표시할 페이지($page)에 따라 $start 계산  
           $start = ($page - 1) * $scale;
@@ -73,7 +70,7 @@
           if ($mode == "send")
             $sql = "select * from message where send_id=:userid order by num desc limit {$start}, {$scale}";
           else
-            $sql = "select * from message where rv_id=:userid order by num desc";
+            $sql = "select * from message where rv_id=:userid order by num desc limit {$start}, {$scale}";
 
           $stmt = $conn->prepare($sql);
           $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -101,41 +98,24 @@
             $record = $stmt2->fetch();
             $msg_name = $record["name"];
           ?>
-            <li>
-              <span class="col1"><?= $number ?></span>
-              <span class="col2"><a href="message_view.php?mode=<?= $mode ?>&num=<?= $num ?>"><?= $subject ?></a></span>
-              <span class="col3"><?= $msg_name ?>(<?= $msg_id ?>)</span>
-              <span class="col4"><?= $regist_day ?></span>
-            </li>
+            <tbody>
+              <td class="col1"><?= $number ?></td>
+              <td class="col2"><a href="message_view.php?mode=<?= $mode ?>&num=<?= $num ?>"><?= $subject ?></a></td>
+              <td class="col3"><?= $msg_name ?>(<?= $msg_id ?>)</td>
+              <td class="col4"><?= $regist_day ?></td>
+            </tbody>
           <?php
             $number--;
           }
           ?>
-        </ul>
-        <ul id="page_num">
+        </table>
+        <div class="container d-flex justify-content-center align-items-start mb-3 gap-3">
           <?php
-          if ($total_page >= 2 && $page >= 2) {
-            $new_page = $page - 1;
-            echo "<li><a href='message_box.php?mode=$mode&page=$new_page'>◀ 이전</a> </li>";
-          } else
-            echo "<li>&nbsp;</li>";
-
-          // 게시판 목록 하단에 페이지 링크 번호 출력
-          for ($i = 1; $i <= $total_page; $i++) {
-            if ($page == $i)     // 현재 페이지 번호 링크 안함
-            {
-              echo "<li><b> $i </b></li>";
-            } else {
-              echo "<li> <a href='message_box.php?mode=$mode&page=$i'> $i </a> <li>";
-            }
-          }
-          if ($total_page >= 2 && $page != $total_page) {
-            $new_page = $page + 1;
-            echo "<li> <a href='message_box.php?mode=$mode&page=$new_page'>다음 ▶</a> </li>";
-          } else
-            echo "<li>&nbsp;</li>";
+          $set_page_limit = 5;
+          echo pagination($total_record, $scale, $set_page_limit, $page);
           ?>
-        </ul> <!-- page -->
+          <button type="button" class="btn btn-outline-dark " id="btn_excel">엑셀로 저장</button>
+        </div>
         <ul class="buttons">
           <li><button onclick="location.href='message_box.php?mode=rv'">수신 쪽지함</button></li>
           <li><button onclick="location.href='message_box.php?mode=send'">송신 쪽지함</button></li>

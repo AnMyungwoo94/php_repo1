@@ -9,7 +9,7 @@
   <!-- 슬라이드 스크립트 -->
   <script src="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/js/slide.js' ?>"></script>
   <!--회원가입폼 스크립트 -->
-  <script src="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/member/js/member.js?v=<?= date('Ymdhis') ?>"></script>
+  <script src="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/member/js/member_update.js?v=<?= date('Ymdhis') ?>"></script>
   <!-- 공통, 슬라이드, 헤더 스타일 -->
   <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/common.css' ?>">
   <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/slide.css?er=1' ?>">
@@ -81,17 +81,18 @@
                 <div class="form">
                   <div class="col1">비밀번호</div>
                   <div class="col2">
-                    <input type="password" name="pass" value=<?= $row['pass'] ?>>
+                    <input type="password" name="pass" placeholder="새로운 비밀번호 입력가능" ?>
                   </div>
                 </div>
                 <div class="clear"></div>
                 <div class="form">
                   <div class="col1">비밀번호 확인</div>
                   <div class="col2">
-                    <input type="password" name="pass_confirm" value=<?= $row['pass'] ?>>
+                    <input type="password" name="pass_confirm" placeholder="새로운 비밀번호 입력가능" ?>
                   </div>
                 </div>
-                <div class="clear"></div>
+                <div class=" clear">
+                </div>
                 <div class="form">
                   <div class="col1">이름</div>
                   <div class="col2">

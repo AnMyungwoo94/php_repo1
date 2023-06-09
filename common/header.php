@@ -53,7 +53,8 @@ $userpoint = (isset($_SESSION['userpoint']) && $_SESSION['userpoint'] != "") ? $
     <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/message/message_form.php' ?>">쪽지</a></li>
     <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/board/board_list.php' ?>">게시판</a></li>
     <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/notice/notice_list.php' ?>">공지사항</a></li>
-    <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/imsi.php' ?>">임시</a></li>
+    <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/image_board/board_list.php' ?>">이미지 게시판</a></li>
+    <!-- <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/imsi.php' ?>">임시</a></li> -->
     <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/secure_member.php' ?>">회원보안처리</a></li>
   </ul>
 </div>

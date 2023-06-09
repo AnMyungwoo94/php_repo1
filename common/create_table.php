@@ -20,7 +20,7 @@ function create_table($conn, $table_name)
         $sql = "CREATE TABLE members (
       num int(11) NOT NULL AUTO_INCREMENT,
       id char(15) NOT NULL,
-      pass char(15) NOT NULL,
+      pass varchar(255) NOT NULL,
       name char(10) NOT NULL,
       email char(80) DEFAULT NULL,
       zipcode char(5) DEFAULT '',
@@ -63,9 +63,64 @@ function create_table($conn, $table_name)
           PRIMARY KEY (`num`)
         ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
         break;
-      case '만들 테이블 명':
+      case 'image_board':
+        $sql = "CREATE TABLE `image_board` (
+          `num` int(11) NOT NULL AUTO_INCREMENT,
+          `id` char(15) NOT NULL,
+          `name` char(10) NOT NULL,
+          `subject` char(200) NOT NULL,
+          `content` text NOT NULL,
+          `regist_day` char(20) NOT NULL,
+          `hit` int(11) NOT NULL,
+          `file_name` char(40) DEFAULT NULL,
+          `file_type` char(40) DEFAULT NULL,
+          `file_copied` char(40) DEFAULT NULL,
+          PRIMARY KEY (`num`)
+        ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
         break;
-      case '만들 테이블 명':
+      case 'image_board_ripple':
+        $sql = "CREATE TABLE `image_board_ripple` (
+                `num` int(11) NOT NULL AUTO_INCREMENT,
+                `parent` int(11) NOT NULL,
+                `id` char(15) NOT NULL,
+                `name` char(10) NOT NULL,
+                `nick` char(10) NOT NULL,
+                `content` text NOT NULL,
+                `regist_day` char(20) DEFAULT NULL,
+                PRIMARY KEY (`num`)
+              ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+          ";
+        break;
+      case 'free':
+        $sql = "CREATE TABLE `free` (
+                `num` int(11) NOT NULL AUTO_INCREMENT,
+                `id` char(15) NOT NULL,
+                `name` char(10) NOT NULL,
+                `nick` char(10) NOT NULL,
+                `subject` varchar(100) NOT NULL,
+                `content` text NOT NULL,
+                `regist_day` char(20) DEFAULT NULL,
+                `hit` int(11) DEFAULT NULL,
+                `is_html` char(1) DEFAULT NULL,
+                `file_name_0` char(40) DEFAULT NULL,
+                `file_copied_0` char(30) DEFAULT NULL,
+                `file_type_0` char(30) DEFAULT NULL,
+                PRIMARY KEY (`num`)
+              ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+          ";
+        break;
+      case 'free_ripple':
+        $sql = "CREATE TABLE `free_ripple` (
+                `num` int(11) NOT NULL AUTO_INCREMENT,
+                `parent` int(11) NOT NULL,
+                `id` char(15) NOT NULL,
+                `name` char(10) NOT NULL,
+                `nick` char(10) NOT NULL,
+                `content` text NOT NULL,
+                `regist_day` char(20) DEFAULT NULL,
+                PRIMARY KEY (`num`)
+              ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+          ";
         break;
       default:
         $sql != "";

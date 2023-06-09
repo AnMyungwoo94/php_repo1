@@ -10,10 +10,10 @@ if ($id == "" or $pass == "") {
         </script>");
 }
 // sql 침입방지
-$sql = "select * from members where id=:id and pass=:pass";
+// 출력된 pass 단방향을 처리된 암호화문
+$sql = "select * from members where id=:id ";
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':id', $id);
-$stmt->bindParam(':pass', $pass);
 $stmt->execute();
 $info = $stmt->rowCount() ? true : false;
 
@@ -24,6 +24,14 @@ if ($info == false) {
         </script>");
 }
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!password_verify($pass, $row['pass'])) {
+  die("<script>
+  alert('아이디나 패스워드 잘못 입력되었습니다');
+  history.go(-1);
+  </script>");
+}
+
 
 // 세션설정
 session_start();

@@ -14,3 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.notice_form.submit();
   });
 });
+
+function btn_excel(){
+  self.location.href = "./notice_to_excel.php";
+}

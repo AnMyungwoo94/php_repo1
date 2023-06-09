@@ -12,17 +12,19 @@ $addr1 = (isset($_POST["addr1"])) ? $_POST["addr1"] : '';
 $addr2 = (isset($_POST["addr2"])) ? $_POST["addr2"] : '';
 $regist_day = date('Y-m-d H:i:s');
 
-if ($id == "" or $pass == "" or $name == "" or $email == "" or $addr1 == "" or $addr2 == "" or $zipcode == "") {
+if ($id == "" or $pass == "" or $name == "" or $email == "") {
   die("
   <script>
     alert('데이터 문제 발생');
   </script>");
 }
+//단방향 패스워드 방식으로 처리
+$pass_hash = password_hash($pass, PASSWORD_DEFAULT);
 
 $sql = "insert into members values(null, :id, :pass, :name, :email,  :zipcode, :addr1, :addr2, :regist_day, 9, 0)";
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':id', $id);
-$stmt->bindParam(':pass', $pass);
+$stmt->bindParam(':pass', $pass_hash);
 $stmt->bindParam(':name', $name);
 $stmt->bindParam(':email', $email);
 $stmt->bindParam(':zipcode', $zipcode);
