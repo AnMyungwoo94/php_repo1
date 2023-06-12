@@ -4,10 +4,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>게시글</title>
-	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/common.css' ?>">
-	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/board/css/board.css' ?>">
-	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/slide.css?er=1' ?>">
-	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/header.css' ?>">
+	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/common.css?v=<?= date('Ymdhis') ?>">
+	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST']  ?>/php_source/khs/image_board/css/board.css?v=<?= date('Ymdhis') ?>">
+	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST']  ?>/php_source/khs/css/slide.css?v=<?= date('Ymdhis') ?>">
+	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST']  ?>/php_source/khs/css/header.css?v=<?= date('Ymdhis') ?>">
 	<script src="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/js/slide.js' ?>" defer></script>
 </head>
 
@@ -59,8 +59,9 @@
 			$content = str_replace("\n", "<br>", $content);
 			if ($userid !== $id) {
 				$new_hit = $hit + 1;
-				$sql = "update image_board set hit=$new_hit where num=:num";
+				$sql2 = "update image_board set hit=$new_hit where num=:num";
 				$stmt2 = $conn->prepare($sql2);
+				$stmt->execute();
 			}
 			$file_name_0 = $row['file_name'];
 			$file_copied_0 = $row['file_copied'];
@@ -112,14 +113,6 @@
 					$stmt3->execute();
 					$rowArray = $stmt3->fetchALl();
 
-					// while ($row = $row) {
-					// 	$ripple_num = $row['num'];
-					// 	$ripple_id = $row['id'];
-					// 	$ripple_nick = $row['nick'];
-					// 	$ripple_date = $row['regist_day'];
-					// 	$ripple_content = $row['content'];
-					// 	$ripple_content = str_replace("\n", "<br>", $ripple_content);
-					// 	$ripple_content = str_replace(" ", "&nbsp;", $ripple_content);
 					foreach ($rowArray as $row) {
 						$ripple_num = $row['num'];
 						$ripple_id = $row['id'];
@@ -134,6 +127,7 @@
 							<ul>
 								<li><?= $ripple_id . "&nbsp;&nbsp;" . $ripple_date ?></li>
 								<li id="mdi_del">
+									<span><?= $ripple_content ?></span>
 									<?php
 									if ($_SESSION['userid'] == "admin" || $_SESSION['userid'] == $ripple_id) {
 										echo '
@@ -143,7 +137,7 @@
 													    <input type="hidden" name="mode" value="delete_ripple">
 													    <input type="hidden" name="num" value="' . $ripple_num . '">
 													    <input type="hidden" name="parent" value="' . $num . '">
-													    <span>' . $ripple_content . '</span>
+													    
 													    <input type="submit" value="삭제">
 													    </form>';
 									}
@@ -153,7 +147,7 @@
 						</div>
 						<!--									<div id="ripple_content">-->
 						<!--                                        --><? //= $ripple_content 
-																														?>
+																		?>
 						<!--									</div>-->
 					<?php
 					} //end of while

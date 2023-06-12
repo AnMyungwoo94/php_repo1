@@ -4,10 +4,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>PHP 프로그래밍 입문</title>
-	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/common.css' ?>">
-	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/board/css/board.css' ?>">
-	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/slide.css?er=1' ?>">
-	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/header.css' ?>">
+	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/common.css?v=<?= date('Ymdhis') ?>">
+	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST']  ?>/php_source/khs/image_board/css/board.css?v=<?= date('Ymdhis') ?>">
+	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST']  ?>/php_source/khs/css/slide.css?v=<?= date('Ymdhis') ?>">
+	<link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/header.css?v=<?= date('Ymdhis') ?>">
 	<script src="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/image_board/js/board.js?v=<?= date('Ymdhis') ?>"></script>
 	<script src="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/js/slide.js' ?>" defer></script>
 </head>
@@ -46,19 +46,22 @@
 			// $result = mysqli_query($con, $sql);
 			// $row = mysqli_fetch_array($result);
 			$stmt = $conn->prepare($sql);
+			$stmt->execute();
 			$row = $stmt->fetch();
-			$writer = $row["id"];
+
 
 			// 비로그인 이거나 관리자가 아닌경우
 			if (!isset($userid) && $userlevel != 1) {
-				// alert_back('수정권한이 없습니다.');
+				"alert_back('수정권한이 없습니다.')";
 				exit;
 			}
 
+			$writer = $row["id"];
 			$name = $row["name"];
 			$subject = $row["subject"];
 			$content = $row["content"];
 			$file_name = $row["file_name"];
+			$file_copied = $row["file_copied"];
 			if (empty($file_name)) $file_name = "없음";
 		}
 		?>

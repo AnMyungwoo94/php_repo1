@@ -15,11 +15,11 @@
   <!-- 다음 우편번호검색 스크립트 -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <!-- 공통, 슬라이드, 헤더 스타일 -->
-  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/common.css' ?>">
-  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/slide.css?er=1' ?>">
-  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/header.css' ?>">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/common.css?v=<?= date('Ymdhis') ?>">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/slide.css?v=<?= date('Ymdhis') ?>">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/header.css?v=<?= date('Ymdhis') ?>">
   <!--회원가입폼 스타일  -->
-  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/member/css/member.css' ?>">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/member/css/member.css?v=<?= date('Ymdhis') ?>">
   <!-- 구글폰트 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,8 +92,8 @@
                   <input type="hidden" name="email_check" value="0">
                   <button type="button" onclick="check_email()">중복확인</button>
                   <div class="col2">
-                    <input type="text" name="email1">@
-                    <select name="email2">
+                    <input type="text" name="email1" id="email1">@
+                    <select name="email2" id="email2">
                       <option value="">-선택하세요-</option>
                       <option value="naver.com">naver.com</option>
                       <option value="google.com">google.com</option>

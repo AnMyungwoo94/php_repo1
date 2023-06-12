@@ -2,6 +2,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const send = document.querySelector("#send");
   const cancel = document.querySelector("#cancel");
   const btn_zipcode = document.querySelector("#btn_zipcode");
+  const input_id = document.querySelector("#id");
+  const input_email1 = document.querySelector("#email1");
+  const input_email2 = document.querySelector("#email2");
+
+
+  input_id.addEventListener("input",()=>{
+    document.member_form.id_check.value = "0";
+  })
+
+  input_email1.addEventListener("input",()=>{
+    document.member_form.email_check.value = "0";
+  })
+
+
+  input_email2.addEventListener("change",()=>{
+    document.member_form.email_check.value = "0";
+  })
+  
 
   send.addEventListener("click", () => {
     if (document.member_form.id.value == "") {

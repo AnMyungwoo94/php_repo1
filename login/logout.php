@@ -1,8 +1,8 @@
 <?php
 session_start();
-unset($_SESSION["num"      ]);
-unset($_SESSION["userid"   ]);
-unset($_SESSION["username" ]);
+unset($_SESSION["num"]);
+unset($_SESSION["userid"]);
+unset($_SESSION["username"]);
 unset($_SESSION["userlevel"]);
 unset($_SESSION["userpoint"]);
 

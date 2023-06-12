@@ -14,7 +14,7 @@ date_default_timezone_set("Asia/Seoul");
 
 // // echo "mysql 디비 연결 성공 <br>"; 
 
-// // print_r($conn);
+// // print_r($conn);s
 $servername = 'localhost';
 $dbuser = 'root';
 $password = '123456';

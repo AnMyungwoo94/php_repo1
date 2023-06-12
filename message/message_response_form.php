@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>쪽지 답변</title>
-  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/common.css' ?>">
-  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/message/css/message.css' ?>">
-  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/slide.css?er=2' ?>">
-  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/css/header.css' ?>">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/common.css?v=<?= date('Ymdhis') ?>">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST']  ?>/php_source/khs/message/css/message.css?v=<?= date('Ymdhis') ?>">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/css/slide.css?v=<?= date('Ymdhis') ?>">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST']  ?>/php_source/khs/css/header.css?v=<?= date('Ymdhis') ?>">
   <script src="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/message/js/message_response.js?v=<?= date('Ymdhis') ?>"></script>
 </head>
 

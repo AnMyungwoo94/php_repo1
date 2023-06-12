@@ -9,6 +9,7 @@ if (isset($_POST["mode"]) && $_POST["mode"] === "delete") {
     $page = $_POST["page"];
     $sql = "select * from image_board where num = $num";
     $stmt = $conn->prepare($sql);
+    $stmt->execute();
     $row = $stmt->fetch();
 
     $writer = $row["id"];
@@ -21,6 +22,7 @@ if (isset($_POST["mode"]) && $_POST["mode"] === "delete") {
     ");
     }
     $copied_name = $row["file_copied"];
+
 
     if ($copied_name) {
         $file_path = "./data/" . $copied_name;
@@ -53,7 +55,9 @@ if (isset($_POST["mode"]) && $_POST["mode"] === "delete") {
     // $subject = input_set($subject);
     // $content = input_set($content);
     $regist_day = date("Y-m-d (H:i)");  // 현재의 '년-월-일-시-분'을 저장
+
     $upload_dir = "./data/";
+
     $upfile_name = $_FILES["upfile"]["name"];
     $upfile_tmp_name = $_FILES["upfile"]["tmp_name"];
     $upfile_type = $_FILES["upfile"]["type"];
@@ -79,7 +83,6 @@ if (isset($_POST["mode"]) && $_POST["mode"] === "delete") {
 				");
             exit;
         }
-
         if (!move_uploaded_file($upfile_tmp_name, $uploaded_file)) {
             echo ("
 					<script>
@@ -262,10 +265,10 @@ if (isset($_POST["mode"]) && $_POST["mode"] === "delete") {
     $num = $_POST["num"];
     $parent = $_POST["parent"];
 
-    $sql = "DELETE FROM `image_board_ripple` WHERE num=$q_num";
+    $sql = "DELETE FROM `image_board_ripple` WHERE num=$num";
     $stmt = $conn->prepare($sql);
-    $row = $stmt->fetch();
     $result = $stmt->execute();
+    $row = $stmt->fetch();
     if (!$result) {
         die('Error: ' . mysqli_error($conn));
     }

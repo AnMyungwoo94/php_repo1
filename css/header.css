@@ -1,12 +1,33 @@
+/* *{
+  border: 1px dotted black;
+} */
+
 /* 헤더(header.php) */
 div#top { display: flex; align-items: center; justify-content: space-between;
 }
-div.logo i#icon {
-  font-size: 2rem;
-  color: chocolate;
-  font-weight: 900;
+
+div.img_logo{
+margin: auto;
+text-align: center;
+ 
+}
+#icon {
+   /* font-size: 3rem;
+  color: #000000;
+  font-weight: 900;  */
+  width: 130px; 
+  height: 130px; 
+  margin-top: 20px;
 }
 
+#logo{
+  display: block;
+  text-align: center;
+}
+
+#logo_img{
+  text-align: center;
+}
 div.logo a#title {
   font-size: 1.5rem;
   margin-left: 30px;

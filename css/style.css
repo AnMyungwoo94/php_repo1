@@ -8,7 +8,7 @@ a:hover { text-decoration:none; color: #222222; }
 a:visited { text-decoration:none; color: #222222; }
 a:active { text-decoration:none; color: #222222; }
 /* 헤더(header.php) */
-header { height: 110px; border-bottom: solid 1px #cccccc}
+header { height: 110px; border-bottom: solid 1px #cccccc;}
 header .logo { float: left; margin: 20px; }
 header .top_menu { float: right; margin: 20px; }
 header li { display: inline; }

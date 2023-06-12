@@ -12,13 +12,35 @@ $userpoint = (isset($_SESSION['userpoint']) && $_SESSION['userpoint'] != "") ? $
 ?>
 
 <!-- 헤더 영역의 로고와 회원가입/로그인 표시 영역 -->
+
+<div class="img_logo">
+  <a href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/index.php" id="title">
+    <img src="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/img/logo2.png' ?>" alt="로고" id="icon">
+  </a>
+</div>
+
+
+</script>
 <div id="top">
   <!-- 1. 로고영역 -->
   <div class="logo">
-    <i class="fa-solid fa-user" id="icon"></i>
-    <a href="http://<?= $_SERVER['HTTP_HOST'] ?>/php_source/khs/index.php" id="title">KJH HOME PAGE</a>
+    <nav role="navigation ">
+      <div id="menuToggle">
+        <input type="checkbox" name="checkbox" id="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu" style="display:none">
+          <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/index.php' ?>">HOME</a></li>
+          <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/message/message_form.php' ?>">쪽지</a></li>
+          <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/board/board_list.php' ?>">게시판</a></li>
+          <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/notice/notice_list.php' ?>">공지사항</a></li>
+          <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/image_board/board_list.php' ?>">이미지 게시판</a></li>
+        </ul>
+      </div>
+    </nav>
   </div>
-  <!-- include되면 삽입된 문서의 위치를 기준으로 -->
+
 
   <!-- 2. 회원가입/로그인 버튼 표시 영역 -->
   <ul id="top_menu">
@@ -32,8 +54,6 @@ $userpoint = (isset($_SESSION['userpoint']) && $_SESSION['userpoint'] != "") ? $
       <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/login/logout.php' ?>">로그아웃</a></li>
       <li> | </li>
       <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/member/member_update_form.php' ?>">회원수정</a></li>
-      <li> | </li>
-      <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/login/member_modify_form.php' ?>">정보수정</a></li>
     <?php } ?>
 
     <!-- 관리자모드로 로그인되었을 때 추가로.. -->
@@ -43,18 +63,5 @@ $userpoint = (isset($_SESSION['userpoint']) && $_SESSION['userpoint'] != "") ? $
       <li> | </li>
       <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/member/member_list.php' ?>">회원리스트</a></li>
     <?php } ?>
-  </ul>
-</div>
-
-<!-- 헤더 영역의 네비게이션 메뉴 영역 -->
-<div id="menu_bar">
-  <ul>
-    <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/index.php' ?>">HOME</a></li>
-    <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/message/message_form.php' ?>">쪽지</a></li>
-    <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/board/board_list.php' ?>">게시판</a></li>
-    <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/notice/notice_list.php' ?>">공지사항</a></li>
-    <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/image_board/board_list.php' ?>">이미지 게시판</a></li>
-    <!-- <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/imsi.php' ?>">임시</a></li> -->
-    <li><a href="http://<?= $_SERVER['HTTP_HOST'] . '/php_source/khs/secure_member.php' ?>">회원보안처리</a></li>
   </ul>
 </div>
